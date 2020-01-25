@@ -1,0 +1,53 @@
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Scanner;
+public class Lottery {
+public static void main(String[] args) {
+  // Declare scanner object to read data from key board
+  Scanner sc = new Scanner(System.in);
+  // Declare lotteryDigits Array with size 3 to store 3 digit lottery
+  // number
+  int lotterdDigits[] = new int[3];
+  int totalDigits = 0;
+  int userLotteryDigits[] = new int[3];
+  HashSet<Integer> tempSet = new HashSet<Integer>();
+  // Generate lottery digits such that it should be unique
+  while (totalDigits != 3) {
+  // Generate lottery digit
+  Random random = new Random();
+   int lotteryDigit = 1 + random.nextInt(9);
+  if (!tempSet.contains(new Integer(lotteryDigit))) {
+   lotterdDigits[totalDigits++] = lotteryDigit;
+    tempSet.add(lotteryDigit);
+  }
+  }
+System.out.println("Enter your three digit lottery digits : ");
+// Read user lottery digits
+int theeDigitNumber = sc.nextInt();
+  int j=2;
+  
+//Extract three digits to array
+  while(theeDigitNumber!=0) {
+  int rem = theeDigitNumber%10;
+   userLotteryDigits[j--] = rem;
+   theeDigitNumber = theeDigitNumber/10;
+}
+  //Check all winning conditions display results accordingly
+  if ((lotterdDigits[0] == userLotteryDigits[0])
+    && (lotterdDigits[1] == userLotteryDigits[1])
+    && (lotterdDigits[2] == userLotteryDigits[2])) {
+  System.out.println("Exact match: you win $10,000");
+} else if ((lotterdDigits[0] == userLotteryDigits[0] || lotterdDigits[0] == userLotteryDigits[1] || lotterdDigits[0] == userLotteryDigits[2])
+    && (lotterdDigits[1] == userLotteryDigits[0] || lotterdDigits[1] == userLotteryDigits[1] || lotterdDigits[1] == userLotteryDigits[2])
+    && (lotterdDigits[2] == userLotteryDigits[0] || lotterdDigits[2] == userLotteryDigits[1] || lotterdDigits[2] == userLotteryDigits[2])) {
+   System.out.println("Match all digits: you win $3,000");
+  } else if ((lotterdDigits[0] == userLotteryDigits[0] || lotterdDigits[0] == userLotteryDigits[1] || lotterdDigits[0] == userLotteryDigits[2])
+    || (lotterdDigits[1] == userLotteryDigits[0] || lotterdDigits[1] == userLotteryDigits[1] || lotterdDigits[1] == userLotteryDigits[2])
+    || (lotterdDigits[2] == userLotteryDigits[0] || lotterdDigits[2] == userLotteryDigits[1] || lotterdDigits[2] == userLotteryDigits[2])) {
+   System.out.println("Match one digit: you win $1,000");
+  } else {
+   System.out.println("Sorry, no match");
+  }
+}
+}
+
